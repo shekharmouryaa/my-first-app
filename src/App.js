@@ -4,6 +4,7 @@ import './App.css';
 // import Card from './Card'
 import { useEffect, useState } from 'react';
 import UserForm from './UserForm';
+import MyFirstClassComp from './MyClassComp';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
 
   useEffect(() => {
       setUserName("First Name render")
+      console.log("helllo");
     }, [])
 
   useEffect(() => {
@@ -50,7 +52,7 @@ function App() {
 
   useEffect(() => {
 
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://dfdfjsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(data => setUsers(data))
       .catch(error => {
@@ -64,7 +66,7 @@ function App() {
   console.log(users);
   return (
     <div className="App">
-      {/* <MyHeader/> */}
+    
       <h1>My First App</h1>
 
       <p className='mt-5'> Username :-{userName} | Count : {count} </p>
@@ -83,13 +85,15 @@ function App() {
 
       <UserForm/>
 
-      {users.map( item =>{
+      <MyFirstClassComp/>
+
+      {/* {users.map( item =>{
         return (
           <ul>
             <li key={item.id} >{item.name}</li>
           </ul>
         )
-      })}
+      })} */}
 
     </div>
   );
