@@ -1,7 +1,7 @@
 
 import './App.css';
 // import MyHeader from './Header'
-import Card from './Card'
+// import Card from './Card'
 import { useEffect, useState } from 'react';
 import UserForm from './UserForm';
 
@@ -25,8 +25,10 @@ function App() {
     },
   ]
 
+  console.log(cardDetail);
   const [userName, setUserName] = useState("user")
   const [count, setCount] = useState(1)
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
       setUserName("First Name render")
@@ -46,6 +48,20 @@ function App() {
     setCount(count + 1)
   }
 
+  useEffect(() => {
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+      .catch(error => {
+        console.log(error);
+      });
+
+
+  }, []);
+
+
+  console.log(users);
   return (
     <div className="App">
       {/* <MyHeader/> */}
@@ -66,6 +82,14 @@ function App() {
       } */}
 
       <UserForm/>
+
+      {users.map( item =>{
+        return (
+          <ul>
+            <li key={item.id} >{item.name}</li>
+          </ul>
+        )
+      })}
 
     </div>
   );

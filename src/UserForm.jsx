@@ -2,21 +2,26 @@ import React, { useState } from 'react'
 
 const UserForm = () => {
 
-    const defaultFrom = {
-        username : "",
-        email : ""
-    }
+//     const defaultFrom = {
+//         username : "",
+//         email : ""
+//     }
 
-const [form , setForm] = useState(defaultFrom)
+// const [form , setForm] = useState(defaultFrom)
 
-const handleChange = (event)=>{
-    setForm({...form, [event.target.name] : event.target.value })
-}
+// const handleChange = (event)=>{
+//     setForm({...form, [event.target.name] : event.target.value })
+// }
 
 const submitForm = (event) =>{
     event.preventDefault()
-    console.log(form);
+    console.log(username, email);
 }
+
+const [username, setUsername] = useState("")
+const [email, setEmail] = useState("")
+
+
 
     return (
         <div className="container">
@@ -32,13 +37,13 @@ const submitForm = (event) =>{
                             <div className="input-group-prepend">
                                 <span className="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" name="username" value={form.username} className="form-control" placeholder="Username" onChange={handleChange} />
+                            <input type="text" name="username" value={username} className="form-control" placeholder="Username" onChange={(e)=>setUsername(e.target.value)} />
                         </div>
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"><i class="fa fa-lock"></i></span>
                             </div>
-                            <input type="email" name="email" value={form.email} className="form-control" placeholder="Email" onChange={handleChange} />
+                            <input type="email" name="email" value={email} className="form-control" placeholder="Email" onChange={(e)=>setEmail(e.target.value)} />
                         </div>
                         <button className="btn btn-secondary btn-block">LOGIN</button>
                     </form>
