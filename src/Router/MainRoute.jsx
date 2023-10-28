@@ -5,6 +5,8 @@ import Card from '../Card'
 import PageNotFound from '../PageNotFound'
 import { WeekName } from '../WeekName'
 import { WeekDay } from '../WeekDay'
+import UserForm from '../UserForm'
+import FormikForm from '../FormikForm'
 
 
 const MainRoute = () => {
@@ -15,6 +17,7 @@ const MainRoute = () => {
                 <Routes>
                     <Route path='/' element={<MyHeader />} />
                     <Route path='/card' element={<Card />} />
+                    <Route path='/user' element={<FormikForm />} />
                     <Route path='*' element={<PageNotFound />} />
                     <Route path="/weeknamelist" element={<WeekName />} />
                     <Route path="/weekday/:dayname" element={<WeekDay />} />

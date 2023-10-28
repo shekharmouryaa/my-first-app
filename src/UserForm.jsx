@@ -1,58 +1,123 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const UserForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    gender: '',
+    skills: [],
+    country: '',
+    age: "",
+  });
 
-//     const defaultFrom = {
-//         username : "",
-//         email : ""
-//     }
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+    let newValue = value
 
-// const [form , setForm] = useState(defaultFrom)
+    if(type === 'checkbox'){
+        newValue = formData.skills.concat(value)
+    }
+    setFormData({
+      ...formData,
+      [name]: newValue,
+    });
+  };
 
-// const handleChange = (event)=>{
-//     setForm({...form, [event.target.name] : event.target.value })
-// }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form data submitted:', formData);
+  };
 
-const submitForm = (event) =>{
-    event.preventDefault()
-    console.log(username, email);
-}
-
-const [username, setUsername] = useState("")
-const [email, setEmail] = useState("")
-
-
-
-    return (
-        <div className="container">
-            <div className="form-box">
-                <div className="header-form">
-                    <h4 className="text-primary text-center"><i className="fa fa-user-circle" style={{ fontSize: "110px" }}></i></h4>
-                    <div className="image">
-                    </div>
-                </div>
-                <div className="body-form">
-                    <form onSubmit={submitForm}>
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"><i class="fa fa-user"></i></span>
-                            </div>
-                            <input type="text" name="username" value={username} className="form-control" placeholder="Username" onChange={(e)=>setUsername(e.target.value)} />
-                        </div>
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"><i class="fa fa-lock"></i></span>
-                            </div>
-                            <input type="email" name="email" value={email} className="form-control" placeholder="Email" onChange={(e)=>setEmail(e.target.value)} />
-                        </div>
-                        <button className="btn btn-secondary btn-block">LOGIN</button>
-                    </form>
-                   
-                </div>
-            </div>
+  return (
+    <div>
+      <h2>User Form</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
         </div>
-    )
-}
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Gender:</label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              checked={formData.gender === 'male'}
+              onChange={handleChange}
+            />
+            Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              checked={formData.gender === 'female'}
+              onChange={handleChange}
+            />
+            Female
+          </label>
+        </div>
+        <div>
+          <label>Skills:</label>
+          <input
+            type="checkbox"
+            name="skills"
+            value={"js"}
+            checked={formData.skills.includes("js")}
+            onChange={handleChange}
+          /> Javascript
+          <input
+            type="checkbox"
+            name="skills"
+            value={"react"}
+            checked={formData.skills.includes("react")}
+            onChange={handleChange}
+          /> React
+            <input
+            type="checkbox"
+            name="skills"
+            value={"htmlcss"}
+            checked={formData.skills.includes("htmlcss")}
+            onChange={handleChange}
+          /> HTML/CSS
+        </div>
+        <div>
+          <label>Country:</label>
+          <select name="country" value={formData.country} onChange={handleChange}>
+            <option value="usa">USA</option>
+            <option value="canada">Canada</option>
+            <option value="uk">UK</option>
+          </select>
+        </div>
+        <div>
+          <label>Age:</label>
+          <input
+            type="number"
+            name="age"
+            value={formData.age}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
 
-export default UserForm
-
+export default UserForm;
