@@ -1,8 +1,18 @@
 import React from "react";
 import mylogo from './logo.svg'
+import { useNavigate } from "react-router-dom";
 const Card = (props) => {
 
     // console.log(props);
+
+
+    localStorage.setItem("token", "shekhar")
+
+    const navigate =  useNavigate()
+
+    const goBack = () =>{
+        navigate('/')
+    }
 
     const showAlert = (msg) => {
         console.log("Hello");
@@ -24,10 +34,20 @@ const Card = (props) => {
                     <button href="#" className={`btn btn-${props.items.color === "dark" ? "warning": props.items.color}`} onClick={showAlert}>Open Alert 1</button>
                     {/* <button href="#" className="btn btn-primary" onClick={() => showAlert("alert 2")}>Open Alert 2</button> */}
                 </div>
+
+                <button className="btn btn-outline-danger" onClick={goBack}> Go Back</button>
             </div>
 
         </>
     )
 }
 
-export default Card
+export default Card;
+
+Card.defaultProps ={
+    items:{
+        title: "My Title",
+        description: "Demo Data",
+        color: "red"
+    }
+}
