@@ -1,18 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
-const HOC = () => {
+export function HOCMain() {
   return (
-    <div>HOC
-     <Counter/>
+    <div>
+      <MyComponentWithLoading />
     </div>
-  )
+  );
 }
 
-export default HOC;
+const HOC = (PropComponent) => {
+
+  return function Loading(props) {
+    const [isLoading, setIsLoading] = useState(false);
+    
+    useEffect(()=>{
+      setTimeout(()=>{
+          setIsLoading(true)
+      },5000)
+    },[])
+
+      return (isLoading ?<PropComponent {...props} /> : <div>Loading...</div>)
+
+  };
+};
 
 
-const Counter = () =>{
-    return(
-        <div>Counter</div>
-    )
-}
+const MyComponent = (props) => {
+  return <div>Component That I want to render atfer 5 seconds</div>;
+};
+
+const MyComponentWithLoading = HOC(MyComponent);
+
+
+
+
