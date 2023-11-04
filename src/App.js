@@ -1,45 +1,37 @@
 
+import { useState } from 'react';
 import './App.css';
-import MyHeader from './Header'
-import Card from './Card'
+import { useDispatch, useSelector } from 'react-redux';
+import { decrementAction, incrementAction } from './Redux/action';
 
 
 function App() {
-  const cardDetail = [
-    {
-      title: "RED CARD 1",
-      color: "primary",
-      description: "This is my first red card content which is good"
-  },
-  {
-    title: "RED CARD 2",
-    color: "dark",
-    description: "This is my second red card content which is good"
-},
-{
-  title: "RED CARD 3",
-  color: "success",
-  description: "This is my third red card content which is good"
-},
-]
+
+  // const [count , setCount] = useState(0)
+  const {count} = useSelector(state => state.counterReducer)
+debugger
+  const dispatch = useDispatch()
+
+
+  const increment = ()=>{
+    dispatch(incrementAction(count + 1))
+    // setCount(count + 1)
+  }
+
+  const decrement = ()=>{
+    dispatch(decrementAction(count - 1))
+    // setCount(count - 1)
+  }
+
   return (
-    <div className="App">
-       <MyHeader/>
-        <h1>My First App</h1>
-        <button className='btn btn-dark'>Click Me</button>
-      {/* <Card cards={cardDetail}/> */}
-
-      {
-      cardDetail.map(
-        (items) =>{
-          return <Card items={items}/>
-          // return <Card title={items.title} description={items.description}/>
-
-      })
-      }
-    
-    </div>
-  );
+    <>
+    <h1>Count Comp 1 : {count}</h1>
+    <button className='btn btn-danger' onClick={increment} >INCREASE</button>
+    <button className='btn btn-info mx-2' onClick={()=>decrement()} >DECREASE</button>
+    </>
+  )
+  
+ 
 }
 
 export default App;
